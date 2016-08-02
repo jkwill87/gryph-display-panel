@@ -44,7 +44,7 @@ All of the service's settings can be configured through the browser with a mouse
 
 Before being hosted `data/auth.txt` needs to be configured with Active Net credentials. The first line must contain the plaintext username for the account and the second line must contain the corresponding password. This file is accompanied by a `.htaccess` file to protect it from being server with Apache.
 
-The latest version distributable version of GDP can be downloaded from the releases page or build interactively using [grunt](http://gruntjs.com). Either way the web application can be deployed by uploading the contents of 'dist' to a web server. Ensure that the 'cache' directory has full read-write access for the `apache` user or else swiping will not work-- ie. `chmod -R 777 cache`. GDP requires PHP and has been tested as working with versions 5.3, 5.6, and 7.0.
+The latest version distributable version of GDP can be downloaded from the project [releases page](https://github.com/jkwill87/gryph-display-panel/releases) or build interactively using [grunt](http://gruntjs.com). Either way the web application can be deployed by uploading the contents of 'dist' to a web server. Ensure that the 'cache' directory has full read-write access for the `apache` user or else swiping will not work-- ie. `chmod -R 777 cache`. GDP requires PHP and has been tested as working with versions 5.3, 5.6, and 7.0.
 
 If you chose to go the grunt route you need to have [NodeJS](https://nodejs.org) installed on your system. Afterwards GDP can be transpiled and configured interactively using the following commands:
 
