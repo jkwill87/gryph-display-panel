@@ -1,0 +1,33 @@
+{
+    "name": "gryph-display-panel",
+    "version": "1.0.0",
+    "description": "GDP is a web service developed for the University of Guelph's athletic department's new digital signage. Its purpose is twofold-- it is designed to display meeting and event scheduling, as well as to validate and record member participation.",
+    "main": "index.html",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/jkwill87/gryph-display-panel.git"
+    },
+    "author": "Jessy Williams",
+    "license": "UNLICENSED",
+    "bugs": {
+        "url": "https://github.com/jkwill87/gryph-display-panel/issues"
+    },
+    "homepage": "https://github.com/jkwill87/gryph-display-panel#readme",
+    "devDependencies": {
+        "bower": "^1.7.9",
+        "grunt": "^1.0.1",
+        "grunt-contrib-clean": "^1.0.0",
+        "grunt-contrib-concat": "^1.0.1",
+        "grunt-contrib-copy": "^1.0.0",
+        "grunt-contrib-cssmin": "^1.0.1",
+        "grunt-contrib-htmlmin": "^2.0.0",
+        "grunt-contrib-sass": "^1.0.0",
+        "grunt-contrib-uglify": "^2.0.0",
+        "grunt-contrib-watch": "^1.0.0",
+        "grunt-prompt": "^1.3.3",
+        "grunt-writefile": "^0.1.4"
+    }
+}
