@@ -12,13 +12,15 @@ module.exports = function(grunt) {
                     style: 'expanded',
                     loadPath: [
                         'bower_components/bootstrap-sass/assets/stylesheets',
-                        'bower_components/fontawesome/scss'
-                    ]
+                        'bower_components/fontawesome/scss',
+                    ],
+                    sourcemap: 'inline'
+
                 },
                 files: {
                     'dist/css/style.css': 'src/scss/style.scss'
                 },
-                update: true
+                update: false
             },
             dist: {
                 options: {
@@ -26,7 +28,8 @@ module.exports = function(grunt) {
                     loadPath: [
                         'bower_components/bootstrap-sass/assets/stylesheets',
                         'bower_components/fontawesome/scss'
-                    ]
+                    ],
+                    sourcemap: 'none'
                 },
                 files: {
                     'dist/css/style.css': 'src/scss/style.scss'
@@ -99,7 +102,7 @@ module.exports = function(grunt) {
                 }, {
                     expand: true,
                     cwd: 'bower_components/fontawesome/',
-                    src: 'fonts/*.woff',
+                    src: 'fonts/*.woff*',
                     dest: 'dist/'
                 }, {
                     expand: true,
