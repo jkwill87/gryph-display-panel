@@ -5,14 +5,25 @@ define('GRANTED', 1);
 define('DENIED', 0);
 define('ERROR', 2);
 
-function query($workstationId, $customerId, $test = true)
-{
+/**
+ * 'Swipes' the passed customer ID at the accompanying workstation and returns
+ * ActiveNet's pass validation response.
+ *
+ * @param $workstationId - the workstation ID number used to log the transaction
+ * record.
+ * @param $customerId - either the ActiveNet primary or alternate key (ie.
+ * student/staff number) used to swipe against.
+ * @return array - first element is an integered (0/1/2) whose value corresponds
+ * to whether the provided customer ID is either authorized, not-authorized, or
+ * not found, respectively in regards to the provided workstation ID.
+ */
+function swipe($workstationId, $customerId) {
     date_default_timezone_set('America/Toronto');
     $USER_AGENT = 'Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.8.1.13)'
-        .' Gecko/20080311 Firefox/2.0.0.13';
-    $site = $test ? 'uofgtrainer' : 'uofg';
+        . ' Gecko/20080311 Firefox/2.0.0.13';
     $now = time();
     $stale = true;
+    $site = "uofg";
 
     /* Create cache directory if missing */
     if (!file_exists(CACHE)) {
@@ -35,13 +46,13 @@ function query($workstationId, $customerId, $test = true)
 
     /* ... if still valid reuse cookie */
     if (!$stale) {
-        $cookie = CACHE."/$cookies[0]";
+        $cookie = CACHE . "/$cookies[0]";
     } /* ... if expired create a new one */
     else {
         foreach ($cookies as $cookie) {
-            unlink(CACHE."/$cookie");
+            unlink(CACHE . "/$cookie");
         }
-        $cookie = CACHE."/$now";
+        $cookie = CACHE . "/$now";
         touch($cookie);
         chmod($cookie, 0777);
 
@@ -54,6 +65,12 @@ function query($workstationId, $customerId, $test = true)
             }
         } catch (Exception $ignored) {
             return;
+        }
+
+        /* If workstation is 0 use training mode w/ front desk workstation */
+        if ($workstationId == "0") {
+            $workstationId = "34";
+            $site = "uofgtrainer";
         }
 
         /* Login, get new sessionid */
@@ -71,7 +88,7 @@ function query($workstationId, $customerId, $test = true)
     /* Set workstation id */
     $ch = curl_init();
     $url = "http://anprodca.active.com/$site/servlet/"
-        .'processAssignWorkstation.sdi';
+        . 'processAssignWorkstation.sdi';
     curl_setopt($ch, CURLOPT_COOKIEJAR, $cookie);
     curl_setopt($ch, CURLOPT_COOKIEFILE, $cookie);
     curl_setopt($ch, CURLOPT_URL, $url);
@@ -87,8 +104,8 @@ function query($workstationId, $customerId, $test = true)
     curl_setopt($ch, CURLOPT_USERAGENT, $USER_AGENT);
     curl_setopt($ch, CURLOPT_URL,
         "http://anprodca.active.com/$site/servlet/scanCard.sdi?oc=Customer"
-        .'&class_name=Pass&isNewPassValidation=true&fromScanCard=true'
-        ."&no_page_redirect=true&scan_element=$customerId"
+        . '&class_name=Pass&isNewPassValidation=true&fromScanCard=true'
+        . "&no_page_redirect=true&scan_element=$customerId"
     );
     $output = curl_exec($ch);
 
@@ -114,7 +131,7 @@ function query($workstationId, $customerId, $test = true)
 
     curl_setopt($ch, CURLOPT_URL,
         "http://anprodca.active.com/$site/servlet/adminChange.sdi?oc=Customer"
-        ."&scan_card=true&scan_element=$customerId");
+        . "&scan_card=true&scan_element=$customerId");
     $output = curl_exec($ch);
 
     curl_close($ch);
@@ -130,8 +147,8 @@ function query($workstationId, $customerId, $test = true)
         /* Get customer img url if available */
         if ((strpos($output, 'downloadPicture.sdi') !== false)) {
             $usrImg = $matches[1];
-            $imgUrl = "http://anprodca.active.com/$site/servlet/downloadPicture"
-                .".sdi?class_name=Customer&customer_id=$usrImg";
+            $imgUrl = "https://anprodca.active.com/$site/servlet/downloadPicture"
+                . ".sdi?class_name=Customer&customer_id=$usrImg";
         }
     } else {
         $status = ERROR;
@@ -141,8 +158,16 @@ function query($workstationId, $customerId, $test = true)
 }
 
 /* Entry point ****************************************************************/
-if (isset($_GET['workstationId']) and isset($_GET['customerId'])) {
-    $swipe = query($_GET['workstationId'], $_GET['customerId']);
-    echo "$swipe[0];$swipe[1]";
+if (!defined('GDP_NOEXEC')) {
+    if (
+        isset($_GET['workstationId'])
+        and isset($_GET['customerId'])
+    ) {
+        $swipe = swipe(
+            $_GET['workstationId'],
+            $_GET['customerId']
+        );
+        echo "$swipe[0];$swipe[1]";
+    }
 }
 /******************************************************************************/

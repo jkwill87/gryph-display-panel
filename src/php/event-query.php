@@ -1,13 +1,23 @@
 <?php
 
-function getCredentials() {
+/**
+ * Parses a plaintext, newline delimited unicode file which contains a username
+ * on the first line and a password on the second.
+ *
+ * @param string $path - the path (relative or absolute) to the authentication
+ * file.
+ * @return null|object - returns null on error, else an object containing the
+ * username, password, and required keepalive properties to issue a request
+ * to ActiveNet's SOAP web service.
+ */
+function getCredentials($path = '../data/auth.txt') {
     $credentials = null;
     try {
-        if ($fh = fopen('../data/auth.txt', 'r')) {
+        if ($fh = fopen($path, 'r')) {
             $credentials = (object)array(
-              "userName" => trim(fgets($fh)),
-              "password" => trim(fgets($fh)),
-              "keepAlive" => false
+                "userName" => trim(fgets($fh)),
+                "password" => trim(fgets($fh)),
+                "keepAlive" => false
             );
         }
     } catch (Exception $ignored) {
@@ -16,17 +26,37 @@ function getCredentials() {
     return $credentials;
 }
 
-function getDates($dateOffset = 0) {
+/**
+ * Will return the current or offset datetime as a string in the format
+ * required to query ActiveNet.
+ *
+ * @param int $dateOffset - date offset, relative to now, to get a date for.
+ * @return string - date formatted as "MM/DD/YYYY".
+ */
+function getDateString($dateOffset = 0) {
     date_default_timezone_set('America/Toronto');
     $brokenTime = getdate(strtotime("+" . $dateOffset . " day"));
     return sprintf(
-        "%02d/%02d/%d", $brokenTime['mon'],
+        "%02d/%02d/%d",
+        $brokenTime['mon'],
         $brokenTime['mday'],
         $brokenTime['year']
     );
 }
 
-function queryEvents($credentials, $facilityID, $dates) {
+/**
+ * Queries ActiveNet's Server for a listing of events taking place over the next
+ * day.
+ *
+ * @param object $credentials - object created by the 'getCredentials' function
+ * which contains the required username, password, and required keepalive
+ * properties to issue a request to ActiveNet's SOAP web service.
+ * @param int $facilityID - the ActiveNet facility ID to query with regards to.
+ * @param string $date - date formatted as "MM/DD/YYYY"
+ * @return array|null - null if error or nothing scheduled else an array of
+ * arrays w/ event information to be parsed by 'parseEvents'.
+ */
+function queryEvents($credentials, $facilityID, $date) {
     $WSDL_URL = 'http://anprodca.active.com/uofg/servlet/ActiveNetWS?wsdl';
     $WSDL_LOCAL = '../data/ActiveNetWS.xml';
 
@@ -36,7 +66,7 @@ function queryEvents($credentials, $facilityID, $dates) {
     $params = array(
         "ws_system_user" => $credentials,
         "resource_ids" => array(intval($facilityID)),
-        "dates" => $dates,
+        "dates" => $date,
         "include_linked_resources" => false,
         "returning_render_customer_id" => 0
     );
@@ -46,8 +76,8 @@ function queryEvents($credentials, $facilityID, $dates) {
         $soap = new SoapClient($WSDL_URL);
         $response = $soap->wsGetResourceBookings($params);
     } catch (Exception $ignored) {
-      // echo 'Caught exception: ',  $ignored->getMessage(), "\n";
-      return null;
+        // echo 'Caught exception: ',  $ignored->getMessage(), "\n";
+        return null;
     }
     if (property_exists($response, "return")) {
         $rawEvents = $response->return;
@@ -61,12 +91,24 @@ function queryEvents($credentials, $facilityID, $dates) {
     return $rawEvents;
 }
 
+
+/**
+ * Used to call and parse 'queryEvents' which contains the raw response from
+ * ActiveNet.
+ *
+ * @param int $facilityID - the ActiveNet facility ID to query with regards to.
+ * @param int $dateOffset - date offset, relative to now, to query events for.
+ * @param bool $debug - if true will dump ActiveNet's raw response.
+ * @return null|string - null on error else a json encoded string containing
+ * an organized, company, name, time_from, and time_to field for each scheduled
+ * event.
+ */
 function parseEvents($facilityID, $dateOffset, $debug = false) {
 
     $NAME_REGX = '~([^A-z]+$)|((summer|spring|fall|winter)[^A-z]*$)~i';
 
     $credentials = getCredentials();
-    $dates = getDates($dateOffset);
+    $dates = getDateString($dateOffset);
     $rawEvents = queryEvents($credentials, $facilityID, $dates);
     if (!($credentials && $dates && $rawEvents)) return null;
     $events = array();
@@ -90,15 +132,18 @@ function parseEvents($facilityID, $dateOffset, $debug = false) {
     return json_encode($events);
 }
 
-/* Entry point ****************************************************************/
-$activeID = isset($_GET['activeId']) ? $_GET['activeId'] : null;
-$dateOffset = isset($_GET['dateOffset']) ? intval($_GET['dateOffset']) : 0;
-$debug = isset($_GET['debug']);
 
-if ($activeID) {
-    $response = parseEvents($activeID, $dateOffset, $debug);
-    echo $response ? $response : '{}';
-} else {
-    echo '{}';
+/* Entry point ****************************************************************/
+if (!defined("GDP_NOEXEC")) {
+    $activeID = isset($_GET['activeId']) ? $_GET['activeId'] : null;
+    $dateOffset = isset($_GET['dateOffset']) ? intval($_GET['dateOffset']) : 0;
+    $debug = isset($_GET['debug']);
+
+    if ($activeID) {
+        $response = parseEvents($activeID, $dateOffset, $debug);
+        echo $response ? $response : '{}';
+    } else {
+        echo '{}';
+    }
 }
 /******************************************************************************/

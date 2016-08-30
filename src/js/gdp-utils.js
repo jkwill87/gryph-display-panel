@@ -1,16 +1,23 @@
-/* Ensure that data from 'gdp-config.js' has been loaded */
-if (typeof GDP_DATA_LOADED == 'undefined')
-    console.log('GDP: error, configuration parameters could not be loaded');
+/**
+ * gdp-utils.js
+ * A set of utility functions used by GDP to query, configure, and display event
+ * information as well as capturing ID swiping. Depends on jQuery 2+ and
+ * moment.js.
+ *
+ * Created August 29, 2016
+ * Author: Jessy Williams
+ * Contact: jessy@jessywilliams.com
+ */
 
-document.body.style.overflow = 'hidden'; // disable scrollbars
 
+/***************************** Cookie Management ******************************/
 
-var __gdp_swipe_timer;
-var __gdp_swipe_cooldown = 0;
-
-
-/* Cookie Management */
-
+/**
+ * (Re)creates a cookie.
+ * @param name - the name of the cookie.
+ * @param value - the value of the cookie.
+ * @param days - the cookie expiration (optional).
+ */
 function control_cookie_create(name, value, days) {
     var expires;
     if (days) {
@@ -21,6 +28,11 @@ function control_cookie_create(name, value, days) {
     document.cookie = name + "=" + value + expires + "; path=/";
 }
 
+/**
+ * Returns the value of a cookie.
+ * @param name - the name of the cookie.
+ * @returns {string} - the value of the cookie.
+ */
 function control_cookie_read(name) {
     var nameEQ = name + "=";
     var ca = document.cookie.split(';');
@@ -30,28 +42,43 @@ function control_cookie_read(name) {
         if (c.indexOf(nameEQ) === 0)
             return c.substring(nameEQ.length, c.length);
     }
-    return null;
+    return "";
 }
 
-function control_cookie_erase(name) {
-    control_cookie_create(name, "", -1);
-}
 
+/**
+ * Commits the current state of the display's settings to cookies.
+ */
 function settings_save() {
-    $.each(GDP_SETTINGS, function(setting, state) {
+    $.each(GDP_SETTINGS, function (setting, state) {
         control_cookie_create('gdp_' + setting, String(state));
     });
     location.reload();
 }
 
-/* User Interaction */
+/**
+ * Erases all cookies by setting them as expired.
+ */
+function settings_reset() {
+    $.each(GDP_SETTINGS, function (setting, state) {
+        if (setting != 'facility')  // skip resetting facility
+            control_cookie_create("gdp_" + setting, "", -1);
+    });
+    location.reload();
+}
 
+
+/******************************* UI Interaction *******************************/
+
+/**
+ * Captures keypresses from the browser.
+ */
 function control_keypress() {
     var regMatch = /\d+/;
     var cid = '';
 
     /* Record users keypresses */
-    $(document).keypress(function(e) {
+    $(document).keypress(function (e) {
         if (e.which != 13) cid += String.fromCharCode(e.which);
 
         /* When the user presses enter attempt to parse swipe id */
@@ -66,36 +93,32 @@ function control_keypress() {
     });
 }
 
-function control_toggle_setting(name) {
-    switch (GDP_SETTINGS[name]) {
-        case "true":
-            GDP_SETTINGS[name] = false;
-            console.log("GDP: '" + name + "'set to false");
-            return;
-        case "false":
-            GDP_SETTINGS[name] = true;
-            console.log("GDP: '" + name + "'set to true");
-            return;
-        default:
-            console.log("GDP: can't set '" + name);
-            return;
-    }
+
+/**
+ * Toggles boolean values w/i GDP_SETTINGS object.
+ * @param name - the name of the setting to toggle.
+ */
+function settings_toggle(name) {
+    GDP_SETTINGS[name] = !GDP_SETTINGS[name];
 }
 
-function settings_toggle(setting) {
-    GDP_SETTINGS[setting] = !GDP_SETTINGS[setting];
-}
-
-function view_swipe_modal(customerId, timeout) {
+/**
+ * Activates the Bootstrap3 swipe modal w/ user photo and validation info.
+ * @param customerID - Swiped customerID (probably ActiveNet alternate key).
+ * @param timeout - The amount of time until the modal is dismissed.
+ */
+function view_swipe_modal(customerID, timeout) {
 
     /* Make ajax call to CardReader.php  */
     $.ajax({
         url: 'php/card-reader.php',
         data: {
-            'workstationId': GDP_FACILITIES[GDP_SETTINGS.facility].workstation,
-            'customerId': customerId
+            'workstationId': GDP_FACILITIES[GDP_SETTINGS.training]
+                ? "0"
+                : GDP_FACILITIES[GDP_SETTINGS.facility].workstation,
+            'customerId': customerID
         },
-        success: function(response) {
+        success: function (response) {
 
             var status = response.split(";")[0];
             var imgUrl = response.split(";")[1];
@@ -129,7 +152,7 @@ function view_swipe_modal(customerId, timeout) {
             __gdp_swipe_cooldown = (timeout * 1000);
             if (__gdp_swipe_cooldown) {
                 clearTimeout(__gdp_swipe_timer);
-                __gdp_swipe_timer = setTimeout(function() {
+                __gdp_swipe_timer = setTimeout(function () {
                     $('#swipe-modal').modal('hide');
                 }, __gdp_swipe_cooldown);
             }
@@ -137,30 +160,32 @@ function view_swipe_modal(customerId, timeout) {
     });
 }
 
-/* Content Handlers */
 
+/***************************** Content Handlers *******************************/
+
+/**
+ * Loads the display's title and appearance based on that configuration.
+ */
 function init_config() {
 
     /* Load settings using cookies */
-
     console.log("GDP: initializing settings");
     var name;
     var cookie;
-    var reset = false;
-    $.each(GDP_SETTINGS, function(setting, state) {
+
+    $.each(GDP_SETTINGS, function (setting, state) {
         name = "gdp_" + setting;
         cookie = control_cookie_read(name);
-        if (cookie !== null) {
+        if (cookie) {
             console.log("\t* read and set '" + name + "' as " + cookie);
+            if (cookie == "true") cookie = true;
+            else if (cookie == "false") cookie = false;
+            GDP_SETTINGS[setting] = cookie;
         } else {
             cookie = GDP_SETTINGS[setting];
             control_cookie_create(name, cookie);
             console.log("\t* wrote and set '" + name + "' as " + cookie);
-            reset = true;
         }
-        if (cookie == "true") cookie = true;
-        if (cookie == "false") cookie = false;
-        GDP_SETTINGS[setting] = cookie;
     });
 
     /* Set Facility Name */
@@ -168,17 +193,15 @@ function init_config() {
         GDP_FACILITIES[GDP_SETTINGS.facility].name;
 
     var nameLen = (GDP_FACILITIES[GDP_SETTINGS.facility].name).length;
-    $('#facility-name').css("font-size", 4 + 45 / nameLen + "vw");
-
+    $('#facility-name').css("font-size", 2.5 + 40 / nameLen + "vw");
 
     /* Configure Settings Modal */
-
-    $.each(GDP_FACILITIES, function(fid, fname) {
+    $.each(GDP_FACILITIES, function (fid, fname) {
         var input = document.createElement('input');
         input.type = 'radio';
         input.name = 'facility_id';
         input.id = fid;
-        input.onclick = function() {
+        input.onclick = function () {
             GDP_SETTINGS.facility = fid;
         };
         input.checked = fid == GDP_SETTINGS.facility;
@@ -200,26 +223,38 @@ function init_config() {
         $("#facility-dropdown").append(li);
     });
 
-
-    $('#load-settings').on('click', function() {
+    $('#load-settings').on('click', function () {
         $('#settings-modal').modal('show');
-        $.each(GDP_SETTINGS, function(setting, state) {
+        $.each(GDP_SETTINGS, function (setting, state) {
             if (setting != 'facility') {
                 $('#' + setting).prop("checked", Boolean(state));
             }
         });
     });
 
-    // if(reset) location.reload();
+    /* Activate swiping if a workstation is set */
+    if (GDP_FACILITIES[GDP_SETTINGS.facility].workstation != 0)
+        control_keypress();
 }
 
+
+/**
+ * Will display the current time within the 'live-time id'. Formatted to look
+ * like 10:00am, for example. Calls itself recursively to update the time.
+
+ */
 function init_clock() {
     document.getElementById('live-time').innerHTML = moment().format('h:mma');
-    setTimeout(function() {
+    setTimeout(function () {
         init_clock();
     }, 5000); // 5 seconds
 }
 
+/**
+ * Interacts w/ GDP's php backend to query ActiveNet for event listing. Displays
+ * these items inside 'event-body' id. Content is set to be updated/ culled on
+ * an interval of 5 minutes.
+ */
 function init_event() {
 
     /* Set body content based on event listing */
@@ -227,9 +262,9 @@ function init_event() {
         url: "php/event-query.php",
         data: {
             'activeId': GDP_SETTINGS.facility
-                //,'dateOffset': "-1"
+            //,'dateOffset': "-1"
         },
-        success: function(response) {
+        success: function (response) {
 
             var json = $.parseJSON(response);
             var time_now = Date.now() / 1000 | 0;
@@ -262,7 +297,6 @@ function init_event() {
                 var th_time_col = document.createElement('th');
                 th_time_col.appendChild(span_clock);
                 th_time_col.appendChild(document.createTextNode(' Time'));
-
 
                 var tr_head = document.createElement('tr');
                 tr_head.appendChild(th_time_col);
@@ -299,8 +333,8 @@ function init_event() {
 
                         tr_body.style.color = colour;
                         tr_body.style.color = (time_from < time_now) &&
-                            (time_now < time_to) &&
-                            GDP_SETTINGS.highlight_current ?
+                        (time_now < time_to) &&
+                        GDP_SETTINGS.highlight_current ?
                             '#4da6ff' : colour;
                         tbody.appendChild(tr_body);
                         colour = shadeColour(colour,
@@ -319,16 +353,32 @@ function init_event() {
             }
         }
     });
-    setTimeout(function() {
+    setTimeout(function () {
         init_event();
     }, 300000); // 5 min
 }
 
+
+/***************************** Helper Functions *******************************/
+
+/**
+ * Will turn a time range into a formatted string.
+ * @param from - the from UNIX timestamp.
+ * @param to - the to UNIX timestamp.
+ * @returns {string} - the formatted time string.
+ */
 function format_time(from, to) {
     return moment.unix(from).format('hh:mma') + ' \u2013 ' +
         moment.unix(to).format('hh:mma');
 }
 
+/**
+ * Takes a hex colour code and darkens/lightens it by the provided percentage.
+ * @param color - the hex colour code to transform
+ * @param percent - the percentage to darken (if positive) or lighten (if
+ * negative).
+ * @returns {string} - the new hex colour code.
+ */
 function shadeColour(color, percent) {
     var f = parseInt(color.slice(1), 16),
         t = percent < 0 ? 0 : 255,
@@ -340,3 +390,15 @@ function shadeColour(color, percent) {
         (Math.round((t - G) * p) + G) * 0x100 +
         (Math.round((t - B) * p) + B)).toString(16).slice(1);
 }
+
+
+/******************************** Entry Point *********************************/
+
+if (typeof GDP_DATA_LOADED == 'undefined')
+    console.log('GDP: error, configuration parameters could not be loaded');
+
+document.body.style.overflow = 'hidden';  // disable scrollbars
+
+var __gdp_swipe_timer;
+var __gdp_swipe_cooldown = 0;
+
