@@ -1,4 +1,4 @@
-<files config.yaml>
+<files auth.txt>
 order allow,deny
 deny from all
 </files>
