@@ -74,6 +74,7 @@ function queryEvents($credentials, $facilityID, $date) {
     // ini_set("soap.wsdl_cache_enabled", "0");  // disable caching
     try {
         $soap = new SoapClient($WSDL_URL);
+        $soap->__setLocation($WSDL_URL);
         $response = $soap->wsGetResourceBookings($params);
     } catch (Exception $ignored) {
         // echo 'Caught exception: ',  $ignored->getMessage(), "\n";
