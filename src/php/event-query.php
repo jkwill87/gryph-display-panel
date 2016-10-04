@@ -106,11 +106,15 @@ function queryEvents($credentials, $facilityID, $date) {
  */
 function parseEvents($facilityID, $dateOffset, $debug = false) {
 
-    $NAME_REGX = '~([^A-z]+$)|((summer|spring|fall|winter)[^A-z]*$)~i';
-
+    $NAME_REGX = '~('
+        .'NRG Class Schedule - '
+        .'|[^A-z]+$)'
+        .'|[^A-z]*((summer|spring|fall|winter)[^A-z]*$'
+        .')~i';
     $credentials = getCredentials();
     $dates = getDateString($dateOffset);
     $rawEvents = queryEvents($credentials, $facilityID, $dates);
+    
     if (!($credentials && $dates && $rawEvents)) return null;
     $events = array();
     foreach ($rawEvents as $rawEvent) {
