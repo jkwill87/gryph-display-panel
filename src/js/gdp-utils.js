@@ -10,89 +10,73 @@
  */
 
 
-/***************************** Cookie Management ******************************/
+/* Query String Encoding/ Decoding ********************************************/
 
 /**
- * (Re)creates a cookie.
- * @param name - the name of the cookie.
- * @param value - the value of the cookie.
- * @param days - the cookie expiration (optional).
+ *
  */
-function control_cookie_create(name, value, days) {
-    var expires;
-    if (days) {
-        var date = new Date();
-        date.setTime(date.getTime() + (days * 86400000));
-        expires = "; expires=" + date.toGMTString();
-    } else expires = "";
-    document.cookie = name + "=" + value + expires + "; path=/";
+function url_encode(){
+    window.location.href = window.location.pathname + "?"
+        + $.param(GDP_SETTINGS);
 }
 
 /**
- * Returns the value of a cookie.
- * @param name - the name of the cookie.
- * @returns {string} - the value of the cookie.
+ * Parses key/ value pairs from the url query
  */
-function control_cookie_read(name) {
-    var nameEQ = name + "=";
-    var ca = document.cookie.split(';');
-    for (var i = 0; i < ca.length; i++) {
-        var c = ca[i];
-        while (c.charAt(0) == ' ') c = c.substring(1, c.length);
-        if (c.indexOf(nameEQ) === 0)
-            return c.substring(nameEQ.length, c.length);
+function url_decode() {
+    var value;
+    var key;
+    var kv_pair;
+    var kv_pairs = window.location.href.slice(
+        window.location.href.indexOf('?') + 1
+    ).split('&');
+    if(kv_pairs.length==1) url_encode();
+    console.log("GDP: initializing settings");
+    for (var i = 0; i < kv_pairs.length; i++) {
+        kv_pair = kv_pairs[i].split('=');
+        key = kv_pair[0];
+        value = kv_pair[1];
+        if (value=='true') value = true;
+        if (value=='false') value = false;
+        if (GDP_SETTINGS[key] != undefined
+            && typeof(value) !== "undefined" && value) {
+            console.log("\t* read and set '" + key + "' as " + value);
+            GDP_SETTINGS[key] = value;
+        }
     }
-    return "";
-}
-
-
-/**
- * Commits the current state of the display's settings to cookies.
- */
-function settings_save() {
-    $.each(GDP_SETTINGS, function (setting, state) {
-        control_cookie_create('gdp_' + setting, String(state));
-    });
-    location.reload();
 }
 
 /**
- * Erases all cookies by setting them as expired.
+ * Encodes key/ value pairs into the url
  */
-function settings_reset() {
-    $.each(GDP_SETTINGS, function (setting, state) {
-        if (setting != 'facility')  // skip resetting facility
-            control_cookie_create("gdp_" + setting, "", -1);
-    });
-    location.reload();
+function url_reset(){
+    window.location.href = window.location.pathname;
 }
 
 
-/******************************* UI Interaction *******************************/
+/* UI Interaction *************************************************************/
 
 /**
  * Captures keypresses from the browser.
  */
 function control_keypress() {
-    var regMatch = /\d+/;
-    var cid = '';
+    var regMatch = /0*(\d{6,10})/;  // 6-10 digits, trimming leading zeroes
+    var userInput = '';
 
     /* Record users keypresses */
     $(document).keypress(function (e) {
-        if (e.which != 13) cid += String.fromCharCode(e.which);
+        if (e.which != 13) userInput += String.fromCharCode(e.which);
 
         /* When the user presses enter attempt to parse swipe id */
         else {
-            if ((cid = regMatch.exec(cid)) !== null) {
-                cid = cid[0];
-                if (cid.indexOf('000') === 0) cid = cid.substring(2);
-                view_swipe_modal(cid, 5); // visible for 5 secs.
+            if ((userInput = regMatch.exec(userInput)) !== null) {
+                userInput = parseInt(userInput[1]);
+                view_swipe_modal(userInput, 5); // visible for 5 secs.
             }
-            cid = ""; // reset id string
+            userInput = ''; // reset id string
         }
     });
 }
-
 
 /**
  * Toggles boolean values w/i GDP_SETTINGS object.
@@ -114,7 +98,7 @@ function view_swipe_modal(customerID, timeout) {
         url: 'php/card-reader.php',
         data: {
             'workstationId': GDP_FACILITIES[GDP_SETTINGS.training]
-                ? "0"
+                ? 0
                 : GDP_FACILITIES[GDP_SETTINGS.facility].workstation,
             'customerId': customerID
         },
@@ -161,32 +145,15 @@ function view_swipe_modal(customerID, timeout) {
 }
 
 
-/***************************** Content Handlers *******************************/
+/* Content Handlers ***********************************************************/
 
 /**
  * Loads the display's title and appearance based on that configuration.
  */
 function init_config() {
 
-    /* Load settings using cookies */
-    console.log("GDP: initializing settings");
-    var name;
-    var cookie;
-
-    $.each(GDP_SETTINGS, function (setting, state) {
-        name = "gdp_" + setting;
-        cookie = control_cookie_read(name);
-        if (cookie) {
-            console.log("\t* read and set '" + name + "' as " + cookie);
-            if (cookie == "true") cookie = true;
-            else if (cookie == "false") cookie = false;
-            GDP_SETTINGS[setting] = cookie;
-        } else {
-            cookie = GDP_SETTINGS[setting];
-            control_cookie_create(name, cookie);
-            console.log("\t* wrote and set '" + name + "' as " + cookie);
-        }
-    });
+    /* Load settings from url query */
+    url_decode();
 
     /* Set Facility Name */
     document.getElementById('facility-name').innerHTML =
@@ -236,7 +203,6 @@ function init_config() {
     if (GDP_FACILITIES[GDP_SETTINGS.facility].workstation != 0)
         control_keypress();
 }
-
 
 /**
  * Will display the current time within the 'live-time id'. Formatted to look
@@ -359,7 +325,7 @@ function init_event() {
 }
 
 
-/***************************** Helper Functions *******************************/
+/* Helper Functions ***********************************************************/
 
 /**
  * Will turn a time range into a formatted string.
@@ -392,7 +358,7 @@ function shadeColour(color, percent) {
 }
 
 
-/******************************** Entry Point *********************************/
+/* Entry Point ****************************************************************/
 
 if (typeof GDP_DATA_LOADED == 'undefined')
     console.log('GDP: error, configuration parameters could not be loaded');
@@ -401,4 +367,3 @@ document.body.style.overflow = 'hidden';  // disable scrollbars
 
 var __gdp_swipe_timer;
 var __gdp_swipe_cooldown = 0;
-
