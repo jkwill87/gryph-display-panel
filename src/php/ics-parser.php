@@ -10,7 +10,6 @@
  * Contact: jessy@jessywilliams.com
  */
 
-
 class VEVENT {
     private $uid;
     private $summary;
@@ -134,7 +133,7 @@ class ICS {
 function facilityToICS($facilityId) {
     define("GDP_NOEXEC", true);
     require_once("event-query.php");
-    $NAME_REGX = '~([^A-z]+$)|[^A-z]*((summer|spring|fall|winter)[^A-z]*$)~i';
+    $NAME_REGX = '~([^A-z]+$)|((summer|spring|fall|winter)[^A-z]*$)~i';
 
     $ics = new ICS();
     if (!$facilityId) return $ics;
