@@ -1,19 +1,20 @@
 <?php
 
 define('CACHE', '../cache');
-define('GRANTED', 1);
 define('DENIED', 0);
-define('ERROR', 2);
+define('GRANTED', 1);
+define('UNKNOWN',2);
+define('ERROR', 3);
 
 /**
  * 'Swipes' the passed customer ID at the accompanying workstation and returns
  * ActiveNet's pass validation response.
  *
- * @param $workstationId - the workstation ID number used to log the transaction
- * record.
- * @param $customerId - either the ActiveNet primary or alternate key (ie.
- * student/staff number) used to swipe against.
- * @return array - first element is an integered (0/1/2) whose value corresponds
+ * @param int $workstationId - the workstation ID number used to log the
+ * transaction record.
+ * @param integer $customerId - either the ActiveNet primary or alternate key
+ * (ie. student/staff number) used to swipe against.
+ * @return array - first element is an integered (0-3) whose value corresponds
  * to whether the provided customer ID is either authorized, not-authorized, or
  * not found, respectively in regards to the provided workstation ID.
  */
@@ -42,12 +43,14 @@ function swipe($workstationId, $customerId) {
         $expiration = intval(end($cookies)) + 3600;
         $stale = $now > $expiration;
     }
-    ob_start();      // prevent any output
+    ob_start();  // prevent any output
 
     /* ... if still valid reuse cookie */
     if (!$stale) {
         $cookie = CACHE . "/$cookies[0]";
-    } /* ... if expired create a new one */
+    }
+
+    /* ... if expired create a new one */
     else {
         foreach ($cookies as $cookie) {
             unlink(CACHE . "/$cookie");
@@ -85,6 +88,7 @@ function swipe($workstationId, $customerId) {
         curl_close($ch);
         unset($ch);
     }
+
     /* Set workstation id */
     $ch = curl_init();
     $url = "http://anprodca.active.com/$site/servlet/"
