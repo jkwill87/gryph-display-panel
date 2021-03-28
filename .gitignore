@@ -5,3 +5,4 @@ src/.idea
 /node_modules
 /src/data/auth.txt
 /tmp
+.DS_Store

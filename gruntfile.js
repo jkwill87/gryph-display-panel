@@ -11,8 +11,8 @@ module.exports = function(grunt) {
                 options: {
                     style: 'expanded',
                     loadPath: [
-                        'bower_components/bootstrap-sass/assets/stylesheets',
-                        'bower_components/fontawesome/scss',
+                        'node_modules/bootstrap-sass/assets/stylesheets',
+                        'src/scss/fontawesome',
                     ],
                     sourcemap: 'inline'
 
@@ -26,8 +26,8 @@ module.exports = function(grunt) {
                 options: {
                     style: 'compressed',
                     loadPath: [
-                        'bower_components/bootstrap-sass/assets/stylesheets',
-                        'bower_components/fontawesome/scss'
+                        'node_modules/bootstrap-sass/assets/stylesheets',
+                        'src/scss/fontawesome',
                     ],
                     sourcemap: 'none'
                 },
@@ -72,7 +72,7 @@ module.exports = function(grunt) {
                 files: [{
                     expand: true,
                     flatten: true,
-                    cwd: 'bower_components/',
+                    cwd: 'node_modules/',
                     src: [
                         'bootstrap-sass/assets/javascripts/bootstrap.min.js',
                         'jquery/dist/jquery.min.js',
@@ -101,7 +101,7 @@ module.exports = function(grunt) {
                     dest: 'dist/'
                 }, {
                     expand: true,
-                    cwd: 'bower_components/fontawesome/',
+                    cwd: 'node_modules/fontawesome/',
                     src: 'fonts/*.woff*',
                     dest: 'dist/'
                 }, {
