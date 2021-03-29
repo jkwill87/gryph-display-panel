@@ -1,22 +1,13 @@
-@import "fontawesome";
-@import "bootstrap";
-
 @font-face {
     font-family: 'Serpentine';
-    src: local('Serpentine Medium Oblique'),
-    url('../fonts/Serpentine-MediumOblique.eot?#iefix') format('embedded-opentype'),
-    url('../fonts/Serpentine-MediumOblique.woff') format('woff'),
-    url('../fonts/Serpentine-MediumOblique.ttf') format('truetype');
+    src: url('../fonts/serpentine-oblique-medium.woff') format('woff');
     font-weight: 500;
     font-style: italic;
 }
 
 @font-face {
     font-family: 'Helvetica Neue';
-    src: local('Helvetica Neue'),
-    url('../fontsHelveticaNeue.eot?#iefix') format('embedded-opentype'),
-    url('../fontsHelveticaNeue.woff') format('woff'),
-    url('../fontsHelveticaNeue.ttf') format('truetype');    font-weight: normal;
+    src: url('../fonts/helvetica-neue.woff') format('woff');
     font-style: normal;
 }
 
@@ -26,6 +17,13 @@ html, body {
 
 h1 {
     font-size: 2rem;
+}
+
+#load-settings {
+    cursor: pointer;
+    display: inline-block;
+    width: 50px;
+    color:red;
 }
 
 .cover-container {
