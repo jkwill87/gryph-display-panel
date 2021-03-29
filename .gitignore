@@ -1,8 +1,5 @@
-src/.idea
-/.sass-cache
-/bower_components
+.DS_Store
+.vscode
 /dist
 /node_modules
-/src/data/auth.txt
-/tmp
-.DS_Store
+src/.idea

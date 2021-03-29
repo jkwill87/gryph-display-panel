@@ -1,0 +1,890 @@
+[
+  {
+    "name": "Gryphon Field House",
+    "facility_id": 9,
+    "workstation_id": 0,
+    "visible": false
+  },
+  {
+    "name": "Mitchell Gym - Court #1",
+    "facility_id": 10,
+    "workstation_id": 0,
+    "visible": false
+  },
+  {
+    "name": "Alumni Stadium - Field",
+    "facility_id": 14,
+    "workstation_id": 0,
+    "visible": false
+  },
+  {
+    "name": "Varsity Field",
+    "facility_id": 15,
+    "workstation_id": 0,
+    "visible": false
+  },
+  {
+    "name": "GSC #3 - South Field",
+    "facility_id": 19,
+    "workstation_id": 0,
+    "visible": false
+  },
+  {
+    "name": "GSC #5 - Field Hockey Pitch",
+    "facility_id": 20,
+    "workstation_id": 0,
+    "visible": false
+  },
+  {
+    "name": "GSC #4 - North Field (Mini/Pract/Warmup)",
+    "facility_id": 21,
+    "workstation_id": 0,
+    "visible": false
+  },
+  {
+    "name": "Gold Rink",
+    "facility_id": 27,
+    "workstation_id": 0,
+    "visible": false
+  },
+  {
+    "name": "Main Diamond",
+    "facility_id": 35,
+    "workstation_id": 0,
+    "visible": false
+  },
+  {
+    "name": "Twin Diamond - West",
+    "facility_id": 36,
+    "workstation_id": 0,
+    "visible": false
+  },
+  {
+    "name": "Beach Court #1",
+    "facility_id": 40,
+    "workstation_id": 0,
+    "visible": false
+  },
+  {
+    "name": "Squash Court - South 1",
+    "facility_id": 57,
+    "workstation_id": 0,
+    "visible": false
+  },
+  {
+    "name": "Z Carel 104",
+    "facility_id": 61,
+    "workstation_id": 0,
+    "visible": false
+  },
+  {
+    "name": "Z Computer - Rm 034",
+    "facility_id": 62,
+    "workstation_id": 0,
+    "visible": false
+  },
+  {
+    "name": "Mitchell Gym - Court #2",
+    "facility_id": 63,
+    "workstation_id": 0,
+    "visible": false
+  },
+  {
+    "name": "GGAC Studio Room 300",
+    "facility_id": 64,
+    "workstation_id": 0,
+    "visible": false
+  },
+  {
+    "name": "Z Florence Partridge - Rm 384",
+    "facility_id": 67,
+    "workstation_id": 0,
+    "visible": false
+  },
+  {
+    "name": "GGAC Studio Room 302",
+    "facility_id": 69,
+    "workstation_id": 0,
+    "visible": true
+  },
+  {
+    "name": "GGAC Studio Room 173",
+    "facility_id": 70,
+    "workstation_id": 36,
+    "visible": true
+  },
+  {
+    "name": "Studio Room 210",
+    "facility_id": 71,
+    "workstation_id": 0,
+    "visible": false
+  },
+  {
+    "name": "Meeting Room JT Powell 207",
+    "facility_id": 72,
+    "workstation_id": 0,
+    "visible": false
+  },
+  {
+    "name": "Gold Pool Lane 1",
+    "facility_id": 74,
+    "workstation_id": 0,
+    "visible": false
+  },
+  {
+    "name": "Gold Pool - East Half",
+    "facility_id": 82,
+    "workstation_id": 0,
+    "visible": false
+  },
+  {
+    "name": "Gold Pool - West Half",
+    "facility_id": 83,
+    "workstation_id": 0,
+    "visible": false
+  },
+  {
+    "name": "Gold Pool Lane 2",
+    "facility_id": 84,
+    "workstation_id": 0,
+    "visible": false
+  },
+  {
+    "name": "Gold Pool Lane 3",
+    "facility_id": 85,
+    "workstation_id": 0,
+    "visible": false
+  },
+  {
+    "name": "Gold Pool Lane 4",
+    "facility_id": 86,
+    "workstation_id": 0,
+    "visible": false
+  },
+  {
+    "name": "Gold Pool Lane 5",
+    "facility_id": 87,
+    "workstation_id": 0,
+    "visible": false
+  },
+  {
+    "name": "Gold Pool Lane 6",
+    "facility_id": 88,
+    "workstation_id": 0,
+    "visible": false
+  },
+  {
+    "name": "Gold Pool Lane 7",
+    "facility_id": 89,
+    "workstation_id": 0,
+    "visible": false
+  },
+  {
+    "name": "Gold Pool Lane 8",
+    "facility_id": 90,
+    "workstation_id": 0,
+    "visible": false
+  },
+  {
+    "name": "Red Pool",
+    "facility_id": 91,
+    "workstation_id": 0,
+    "visible": false
+  },
+  {
+    "name": "Red Pool - Deep End",
+    "facility_id": 92,
+    "workstation_id": 0,
+    "visible": false
+  },
+  {
+    "name": "Red Pool - Shallow End",
+    "facility_id": 93,
+    "workstation_id": 0,
+    "visible": false
+  },
+  {
+    "name": "Red Pool - Lane 1",
+    "facility_id": 94,
+    "workstation_id": 0,
+    "visible": false
+  },
+  {
+    "name": "Red Pool - Lane 2",
+    "facility_id": 95,
+    "workstation_id": 0,
+    "visible": false
+  },
+  {
+    "name": "Red Pool - Lane 3",
+    "facility_id": 96,
+    "workstation_id": 0,
+    "visible": false
+  },
+  {
+    "name": "Red Pool - Lane 4",
+    "facility_id": 97,
+    "workstation_id": 0,
+    "visible": false
+  },
+  {
+    "name": "Gold Pool",
+    "facility_id": 98,
+    "workstation_id": 0,
+    "visible": false
+  },
+  {
+    "name": "West Gym",
+    "facility_id": 99,
+    "workstation_id": 0,
+    "visible": false
+  },
+  {
+    "name": "West Gym - Main Court",
+    "facility_id": 101,
+    "workstation_id": 0,
+    "visible": false
+  },
+  {
+    "name": "West Gym - Court #1",
+    "facility_id": 102,
+    "workstation_id": 0,
+    "visible": false
+  },
+  {
+    "name": "West Gym - Court #2",
+    "facility_id": 103,
+    "workstation_id": 0,
+    "visible": false
+  },
+  {
+    "name": "West Gym - Court #3",
+    "facility_id": 104,
+    "workstation_id": 0,
+    "visible": false
+  },
+  {
+    "name": "West Gym - Court #4",
+    "facility_id": 105,
+    "workstation_id": 0,
+    "visible": false
+  },
+  {
+    "name": "West Gym - Court #5",
+    "facility_id": 106,
+    "workstation_id": 0,
+    "visible": false
+  },
+  {
+    "name": "West Gym - Court #6",
+    "facility_id": 107,
+    "workstation_id": 0,
+    "visible": false
+  },
+  {
+    "name": "GGAC Studio Room 003 (Range)",
+    "facility_id": 108,
+    "workstation_id": 0,
+    "visible": false
+  },
+  {
+    "name": "GGAC Studio Room 242 (Combatives)",
+    "facility_id": 109,
+    "workstation_id": 0,
+    "visible": false
+  },
+  {
+    "name": "Beach Court #2",
+    "facility_id": 110,
+    "workstation_id": 0,
+    "visible": false
+  },
+  {
+    "name": "Beach Court #3",
+    "facility_id": 111,
+    "workstation_id": 0,
+    "visible": false
+  },
+  {
+    "name": "Beach Court #4",
+    "facility_id": 112,
+    "workstation_id": 0,
+    "visible": false
+  },
+  {
+    "name": "Z Child Care and Learning Centre",
+    "facility_id": 113,
+    "workstation_id": 0,
+    "visible": false
+  },
+  {
+    "name": "Johnston Green",
+    "facility_id": 114,
+    "workstation_id": 0,
+    "visible": false
+  },
+  {
+    "name": "Red Rink",
+    "facility_id": 115,
+    "workstation_id": 0,
+    "visible": false
+  },
+  {
+    "name": "Varsity Field - East Half",
+    "facility_id": 116,
+    "workstation_id": 0,
+    "visible": false
+  },
+  {
+    "name": "Varsity Field - West Half",
+    "facility_id": 117,
+    "workstation_id": 0,
+    "visible": false
+  },
+  {
+    "name": "Varsity Field - North Half",
+    "facility_id": 118,
+    "workstation_id": 0,
+    "visible": false
+  },
+  {
+    "name": "Varsity Field - South Half",
+    "facility_id": 119,
+    "workstation_id": 0,
+    "visible": false
+  },
+  {
+    "name": "GSC #2 - East Field",
+    "facility_id": 120,
+    "workstation_id": 0,
+    "visible": false
+  },
+  {
+    "name": "GSC #2 - East Field - North Half",
+    "facility_id": 121,
+    "workstation_id": 0,
+    "visible": false
+  },
+  {
+    "name": "GSC #2 - East Field - South Half",
+    "facility_id": 122,
+    "workstation_id": 0,
+    "visible": false
+  },
+  {
+    "name": "GSC #1 - West Field - South Half",
+    "facility_id": 123,
+    "workstation_id": 0,
+    "visible": false
+  },
+  {
+    "name": "GSC #1 - West Field - North Half",
+    "facility_id": 124,
+    "workstation_id": 0,
+    "visible": false
+  },
+  {
+    "name": "GSC #1 - West Field",
+    "facility_id": 125,
+    "workstation_id": 0,
+    "visible": false
+  },
+  {
+    "name": "Alumni Stadium - Track",
+    "facility_id": 126,
+    "workstation_id": 0,
+    "visible": false
+  },
+  {
+    "name": "Alumni Stadium - Field (East Half)",
+    "facility_id": 127,
+    "workstation_id": 0,
+    "visible": false
+  },
+  {
+    "name": "Alumni Stadium - Field (West Half)",
+    "facility_id": 128,
+    "workstation_id": 0,
+    "visible": false
+  },
+  {
+    "name": "Twin Diamond - East",
+    "facility_id": 129,
+    "workstation_id": 0,
+    "visible": false
+  },
+  {
+    "name": "South Diamond",
+    "facility_id": 130,
+    "workstation_id": 0,
+    "visible": false
+  },
+  {
+    "name": "Gryphon Lounge 131",
+    "facility_id": 131,
+    "workstation_id": 0,
+    "visible": false
+  },
+  {
+    "name": "Mitchell Lobby",
+    "facility_id": 132,
+    "workstation_id": 0,
+    "visible": false
+  },
+  {
+    "name": "Gryphon Centre - Lobby",
+    "facility_id": 133,
+    "workstation_id": 0,
+    "visible": false
+  },
+  {
+    "name": "Small Gym",
+    "facility_id": 134,
+    "workstation_id": 0,
+    "visible": false
+  },
+  {
+    "name": "Field House - #1 - West Field",
+    "facility_id": 135,
+    "workstation_id": 0,
+    "visible": false
+  },
+  {
+    "name": "Field House - #2 - Middle Field",
+    "facility_id": 136,
+    "workstation_id": 0,
+    "visible": false
+  },
+  {
+    "name": "Field House - #3 - East Field",
+    "facility_id": 137,
+    "workstation_id": 0,
+    "visible": false
+  },
+  {
+    "name": "Field House - Track",
+    "facility_id": 138,
+    "workstation_id": 0,
+    "visible": false
+  },
+  {
+    "name": "Athletics Centre",
+    "facility_id": 139,
+    "workstation_id": 0,
+    "visible": false
+  },
+  {
+    "name": "Mitchell Gym",
+    "facility_id": 140,
+    "workstation_id": 0,
+    "visible": false
+  },
+  {
+    "name": "Field House - Full Field",
+    "facility_id": 141,
+    "workstation_id": 0,
+    "visible": false
+  },
+  {
+    "name": "Squash Court - South 2",
+    "facility_id": 142,
+    "workstation_id": 0,
+    "visible": false
+  },
+  {
+    "name": "Squash Court - North 1",
+    "facility_id": 143,
+    "workstation_id": 0,
+    "visible": false
+  },
+  {
+    "name": "Squash Court - North 2",
+    "facility_id": 144,
+    "workstation_id": 0,
+    "visible": false
+  },
+  {
+    "name": "Squash Court - North 3",
+    "facility_id": 145,
+    "workstation_id": 0,
+    "visible": false
+  },
+  {
+    "name": "Z CAF - Front Entrance",
+    "facility_id": 146,
+    "workstation_id": 0,
+    "visible": false
+  },
+  {
+    "name": "Z Meeting Room 108",
+    "facility_id": 147,
+    "workstation_id": 0,
+    "visible": false
+  },
+  {
+    "name": "Z ASN - Front Entrance",
+    "facility_id": 148,
+    "workstation_id": 0,
+    "visible": false
+  },
+  {
+    "name": "Beach Court Complex",
+    "facility_id": 149,
+    "workstation_id": 0,
+    "visible": false
+  },
+  {
+    "name": "Fitness Centre",
+    "facility_id": 150,
+    "workstation_id": 0,
+    "visible": false
+  },
+  {
+    "name": "z Arkell Swine",
+    "facility_id": 151,
+    "workstation_id": 0,
+    "visible": false
+  },
+  {
+    "name": "Climbing Wall",
+    "facility_id": 159,
+    "workstation_id": 0,
+    "visible": false
+  },
+  {
+    "name": "Gold Pool - North Half",
+    "facility_id": 502,
+    "workstation_id": 0,
+    "visible": false
+  },
+  {
+    "name": "Gold Pool - South Half",
+    "facility_id": 503,
+    "workstation_id": 0,
+    "visible": false
+  },
+  {
+    "name": "Gold Pool Lane 1 East",
+    "facility_id": 508,
+    "workstation_id": 0,
+    "visible": false
+  },
+  {
+    "name": "Gold Pool Lane 2 East",
+    "facility_id": 509,
+    "workstation_id": 0,
+    "visible": false
+  },
+  {
+    "name": "Gold Pool Lane 4 East",
+    "facility_id": 510,
+    "workstation_id": 0,
+    "visible": false
+  },
+  {
+    "name": "Gold Pool Lane 3 East",
+    "facility_id": 511,
+    "workstation_id": 0,
+    "visible": false
+  },
+  {
+    "name": "Gold Pool Lane 5 East",
+    "facility_id": 512,
+    "workstation_id": 0,
+    "visible": false
+  },
+  {
+    "name": "Gold Pool Lane 6 East",
+    "facility_id": 513,
+    "workstation_id": 0,
+    "visible": false
+  },
+  {
+    "name": "Gold Pool Lane 7 East",
+    "facility_id": 514,
+    "workstation_id": 0,
+    "visible": false
+  },
+  {
+    "name": "Gold Pool Lane 8 East",
+    "facility_id": 515,
+    "workstation_id": 0,
+    "visible": false
+  },
+  {
+    "name": "Mitchell Gym - Main Court",
+    "facility_id": 516,
+    "workstation_id": 0,
+    "visible": false
+  },
+  {
+    "name": "West End Recreation Centre",
+    "facility_id": 517,
+    "workstation_id": 0,
+    "visible": false
+  },
+  {
+    "name": "Meeting Room 202",
+    "facility_id": 518,
+    "workstation_id": 0,
+    "visible": false
+  },
+  {
+    "name": "Dave Copp Garden",
+    "facility_id": 521,
+    "workstation_id": 0,
+    "visible": false
+  },
+  {
+    "name": "GGAC Larry Pearson Lobby",
+    "facility_id": 541,
+    "workstation_id": 0,
+    "visible": false
+  },
+  {
+    "name": "UGAA Climbing Centre",
+    "facility_id": 542,
+    "workstation_id": 0,
+    "visible": false
+  },
+  {
+    "name": "GGAC Event Centre",
+    "facility_id": 543,
+    "workstation_id": 0,
+    "visible": false
+  },
+  {
+    "name": "GGAC Event Centre - #2 - Middle Court",
+    "facility_id": 544,
+    "workstation_id": 0,
+    "visible": false
+  },
+  {
+    "name": "GGAC VIP Suite",
+    "facility_id": 545,
+    "workstation_id": 0,
+    "visible": false
+  },
+  {
+    "name": "GGAC Meeting Room 3201",
+    "facility_id": 546,
+    "workstation_id": 0,
+    "visible": false
+  },
+  {
+    "name": "GGAC Meeting Room 3203",
+    "facility_id": 547,
+    "workstation_id": 0,
+    "visible": false
+  },
+  {
+    "name": "GGAC Studio Room 3206 Wrestling",
+    "facility_id": 548,
+    "workstation_id": 0,
+    "visible": false
+  },
+  {
+    "name": "GGAC Studio Room 3202",
+    "facility_id": 549,
+    "workstation_id": 0,
+    "visible": false
+  },
+  {
+    "name": "GGAC Studio Room 3212",
+    "facility_id": 550,
+    "workstation_id": 0,
+    "visible": false
+  },
+  {
+    "name": "GGAC Studio Room 3214",
+    "facility_id": 551,
+    "workstation_id": 0,
+    "visible": false
+  },
+  {
+    "name": "GGAC Studio Room 3216",
+    "facility_id": 552,
+    "workstation_id": 0,
+    "visible": false
+  },
+  {
+    "name": "GGAC Studio Room 3213",
+    "facility_id": 553,
+    "workstation_id": 0,
+    "visible": false
+  },
+  {
+    "name": "GGAC Event Centre - #3 - East Court",
+    "facility_id": 554,
+    "workstation_id": 0,
+    "visible": false
+  },
+  {
+    "name": "GGAC Event Centre - #1 - West Court",
+    "facility_id": 555,
+    "workstation_id": 0,
+    "visible": false
+  },
+  {
+    "name": "Visitors Team Room 1",
+    "facility_id": 556,
+    "workstation_id": 0,
+    "visible": false
+  },
+  {
+    "name": "Visitors Team Room 2",
+    "facility_id": 557,
+    "workstation_id": 0,
+    "visible": false
+  },
+  {
+    "name": "Visitors Team Room 3",
+    "facility_id": 558,
+    "workstation_id": 0,
+    "visible": false
+  },
+  {
+    "name": "Visitors Team Room 4",
+    "facility_id": 559,
+    "workstation_id": 0,
+    "visible": false
+  },
+  {
+    "name": "Officials Room 1",
+    "facility_id": 560,
+    "workstation_id": 0,
+    "visible": false
+  },
+  {
+    "name": "Officials Room 2",
+    "facility_id": 561,
+    "workstation_id": 0,
+    "visible": false
+  },
+  {
+    "name": "GGAC Track",
+    "facility_id": 562,
+    "workstation_id": 0,
+    "visible": false
+  },
+  {
+    "name": "Garney Henley Event Entrance",
+    "facility_id": 563,
+    "workstation_id": 0,
+    "visible": false
+  },
+  {
+    "name": "UGAA Student Lounge (and Booster Juice)",
+    "facility_id": 564,
+    "workstation_id": 0,
+    "visible": false
+  },
+  {
+    "name": "GGAC Event Centre - Event Court",
+    "facility_id": 565,
+    "workstation_id": 0,
+    "visible": false
+  },
+  {
+    "name": "GGAC Rock Climbing Wall",
+    "facility_id": 654,
+    "workstation_id": 0,
+    "visible": false
+  },
+  {
+    "name": "GGAC Meeting Room 210A",
+    "facility_id": 684,
+    "workstation_id": 0,
+    "visible": false
+  },
+  {
+    "name": "GGAC Meeting Room 210B",
+    "facility_id": 685,
+    "workstation_id": 0,
+    "visible": false
+  },
+  {
+    "name": "Pavilion Meeting Room 210 (Board Room)",
+    "facility_id": 700,
+    "workstation_id": 0,
+    "visible": false
+  },
+  {
+    "name": "Pavilion Meeting Room 208 (Red Zone)",
+    "facility_id": 701,
+    "workstation_id": 0,
+    "visible": false
+  },
+  {
+    "name": "Pavilion Rooftop Terrace",
+    "facility_id": 702,
+    "workstation_id": 0,
+    "visible": false
+  },
+  {
+    "name": "Grooming Room 105",
+    "facility_id": 705,
+    "workstation_id": 0,
+    "visible": false
+  },
+  {
+    "name": "Pavilion Meeting Room 217 (QB's)",
+    "facility_id": 706,
+    "workstation_id": 0,
+    "visible": false
+  },
+  {
+    "name": "Pavilion Meeting Room 219 (RunningBacks)",
+    "facility_id": 707,
+    "workstation_id": 0,
+    "visible": false
+  },
+  {
+    "name": "Pavilion Meeting Room 223 (Linebackers)",
+    "facility_id": 708,
+    "workstation_id": 0,
+    "visible": false
+  },
+  {
+    "name": "Pavilion Meeting Room 221 (DefensiveLine)",
+    "facility_id": 709,
+    "workstation_id": 0,
+    "visible": false
+  },
+  {
+    "name": "Athletics SAM",
+    "facility_id": 777,
+    "workstation_id": 0,
+    "visible": false
+  },
+  {
+    "name": "GGAC Room 241A - Collaboration Space",
+    "facility_id": 791,
+    "workstation_id": 0,
+    "visible": false
+  },
+  {
+    "name": "GGAC Meeting Room 241",
+    "facility_id": 792,
+    "workstation_id": 0,
+    "visible": false
+  },
+  {
+    "name": "Guelph Gryphons Performance Centre",
+    "facility_id": 801,
+    "workstation_id": 0,
+    "visible": false
+  },
+  {
+    "name": "Gryphon Performance Centre",
+    "facility_id": 802,
+    "workstation_id": 0,
+    "visible": false
+  },
+  {
+    "name": "Low Ropes Course",
+    "facility_id": 803,
+    "workstation_id": 0,
+    "visible": false
+  }
+]
