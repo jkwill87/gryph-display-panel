@@ -97,7 +97,7 @@ function view_swipe_modal(customer_id, timeout) {
     (room) => room.facility_id === Number(SETTING_DATA.facility)
   );
   if (_selected_room && SETTING_DATA.training)
-    _selected_room.workstation_id = 0;
+    _selected_room.workstation_id = null;
   const image = new Image();
   image.className = "img-responsive";
   let alertDetails, alertStatus, alertClass;
@@ -204,7 +204,7 @@ function init_config() {
     (room) => Number(room.facility_id) === Number(SETTING_DATA.facility)
   );
   if (_selected_room && SETTING_DATA.training)
-    _selected_room.workstation_id = 0;
+    _selected_room.workstation_id = null;
 
   /* Set Facility Name */
   document.getElementById("facility-name").innerHTML = _selected_room.name;
@@ -251,7 +251,7 @@ function init_config() {
   });
 
   /* Activate swiping if a workstation is set */
-  if (_selected_room.workstation_id != 0) control_keypress();
+  if (_selected_room.workstation_id) control_keypress();
 }
 
 /**
