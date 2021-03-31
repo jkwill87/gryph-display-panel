@@ -7,20 +7,10 @@ module.exports = function (grunt) {
 
     copy: {
       all: {
-        files: [
-          {
-            expand: true,
-            cwd: "src/",
-            src: ["*.php", "*.css", "*.js", ".htaccess"],
-            dest: "dist/",
-          },
-          {
-            expand: true,
-            cwd: "src/",
-            src: "{fonts,img,data,php}/*",
-            dest: "dist/",
-          },
-        ],
+        expand: true,
+        cwd: "src/",
+        src: ["**"],
+        dest: "dist/",
       },
     },
 
@@ -34,7 +24,10 @@ module.exports = function (grunt) {
         dest: "dist/vendor.js",
       },
       vendor_css: {
-        src: ["node_modules/bootstrap/dist/css/bootstrap.css"],
+        src: [
+          "node_modules/bootstrap/dist/css/bootstrap.css",
+          "vendor/font-awesome.css",
+        ],
         dest: "dist/vendor.css",
       },
     },
@@ -50,13 +43,7 @@ module.exports = function (grunt) {
 
     watch: {
       scripts: {
-        files: [
-          "gruntfile.js",
-          "src/*.php",
-          "src/gdp.js",
-          "src/style.css",
-          "src/php/*.php",
-        ],
+        files: ["gruntfile.js", "src/**"],
         tasks: ["copy", "concat"],
         options: {
           spawn: false,
@@ -66,13 +53,13 @@ module.exports = function (grunt) {
 
     writefile: {
       all: {
-        src: "src/data/auth.hbs",
+        src: "_templates/auth.hbs",
         dest: "dist/data/auth.txt",
       },
     },
 
     prompt: {
-      all: {
+      auth: {
         options: {
           questions: [
             {

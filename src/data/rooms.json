@@ -699,7 +699,7 @@
     "name": "GGAC Studio Room 3214",
     "facility_id": 551,
     "workstation_id": null,
-    "visible": false
+    "visible": true
   },
   {
     "name": "GGAC Studio Room 3216",

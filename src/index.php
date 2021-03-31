@@ -5,8 +5,9 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Gryphon Display Panel</title>
 
+    <title>Gryphon Display Panel</title>
+    <link rel="shortcut icon" href="img/ui/favicon.ico" type="image/x-icon">
     <!-- Stylesheets -->
     <link href="vendor.css" rel="stylesheet">
     <link href="style.css" rel="stylesheet">
@@ -25,7 +26,7 @@
 
     <!-- Button trigger modal -->
     <button class="btn btn-default config-button" type="button" id="load-settings">
-        <?php echo file_get_contents("img/cogs.svg") ?>
+        <span class="fa fa-sliders fa-2x" aria-hidden="true"></span>
     </button>
 
     <!-- Setting Modal Content -->
@@ -125,7 +126,27 @@
 
         <!-- Event Table -->
         <div class="row">
-            <p id="event-body"></p>
+            <p id="event-text">Nothing Scheduled</p>
+            <table class="table" id="event-table">
+                <thead>
+                    <tr>
+                        <th>
+                            <div class="center">
+                                <span class="fa fa-clock-o"></span>
+                                &ensp;Time
+                            </div>
+                        </th>
+                        <th>
+                            <div class="center">
+                                <span class="fa fa-calendar-o"></span>
+                                &ensp;Event Name
+                            </div>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody id="event-table-body">
+                </tbody>
+            </table>
         </div>
 
     </div>
