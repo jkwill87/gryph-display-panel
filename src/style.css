@@ -1,234 +1,258 @@
 @font-face {
-    font-family: 'Serpentine';
-    src: url('../fonts/serpentine-oblique-medium.woff') format('woff');
-    font-weight: 500;
-    font-style: italic;
+  font-family: "Serpentine";
+  src: url("../fonts/serpentine-oblique-medium.woff") format("woff");
+  font-weight: 500;
+  font-style: italic;
 }
 
 @font-face {
-    font-family: 'Helvetica Neue';
-    src: url('../fonts/helvetica-neue.woff') format('woff');
-    font-style: normal;
+  font-family: "Serpentine";
+  src: url("../fonts/serpentine-oblique-medium.woff") format("woff");
+  font-weight: 500;
+  font-style: italic;
 }
 
-html, body {
-    font-size: 1.25rem;
+@font-face {
+  font-family: "Helvetica Neue";
+  src: url("../fonts/helvetica-neue.woff") format("woff");
+  font-style: normal;
+}
+
+html,
+body {
+  font-size: 1.25rem;
 }
 
 h1 {
-    font-size: 2rem;
+  font-size: 2rem;
+}
+
+svg {
+  stroke-width: 5;
 }
 
 #load-settings {
-    cursor: pointer;
-    display: inline-block;
-    width: 50px;
-    color:red;
+  cursor: pointer;
+  display: inline-block;
+  width: 50px;
+  color: lightgrey;
 }
 
 .cover-container {
-    margin-right: auto;
-    margin-left: auto;
+  margin-right: auto;
+  margin-left: auto;
 }
 
 .config-button {
-    background: transparent;
-    color: lightgrey;
-    border: none;
-    position: absolute;
-    top: 3vh;
-    right: 3vw;
+  background: transparent;
+  color: lightgrey;
+  border: none;
+  position: absolute;
+  top: 3vh;
+  right: 3vw;
 }
 
 .material-switch > input[type="checkbox"] {
-    display: none;
+  display: none;
 }
 
 .material-switch > label {
-    cursor: pointer;
-    height: 0;
-    position: relative;
-    width: 40px;
+  cursor: pointer;
+  height: 0;
+  position: relative;
+  width: 40px;
 }
 
 .material-switch > label::before {
-    background: rgb(0, 0, 0);
-    box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.5);
-    border-radius: 8px;
-    content: '';
-    height: 16px;
-    margin-top: -8px;
-    position: absolute;
-    opacity: 0.3;
-    transition: all 0.4s ease-in-out;
-    width: 40px;
+  background: rgb(0, 0, 0);
+  box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.5);
+  border-radius: 8px;
+  content: "";
+  height: 16px;
+  margin-top: -8px;
+  position: absolute;
+  opacity: 0.3;
+  transition: all 0.4s ease-in-out;
+  width: 40px;
 }
 
 .material-switch > label::after {
-    background: rgb(255, 255, 255);
-    border-radius: 16px;
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
-    content: '';
-    height: 24px;
-    left: -4px;
-    margin-top: -8px;
-    position: absolute;
-    top: -4px;
-    transition: all 0.3s ease-in-out;
-    width: 24px;
+  background: rgb(255, 255, 255);
+  border-radius: 16px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+  content: "";
+  height: 24px;
+  left: -4px;
+  margin-top: -8px;
+  position: absolute;
+  top: -4px;
+  transition: all 0.3s ease-in-out;
+  width: 24px;
 }
 
 .material-switch > input[type="checkbox"]:checked + label::before {
-    background: inherit;
-    opacity: 0.5;
+  background: inherit;
+  opacity: 0.5;
 }
 
 .material-switch > input[type="checkbox"]:checked + label::after {
-    background: inherit;
-    left: 20px;
+  background: inherit;
+  left: 20px;
 }
 
 .material-switch > input[type="checkbox"] {
-    display: none;
+  display: none;
 }
 
 .material-switch > label {
-    cursor: pointer;
-    height: 0;
-    position: relative;
-    width: 40px;
+  cursor: pointer;
+  height: 0;
+  position: relative;
+  width: 40px;
 }
 
 .material-switch > label::before {
-    background: rgb(0, 0, 0);
-    box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.5);
-    border-radius: 8px;
-    content: '';
-    height: 16px;
-    margin-top: -8px;
-    position: absolute;
-    opacity: 0.3;
-    transition: all 0.4s ease-in-out;
-    width: 40px;
+  background: rgb(0, 0, 0);
+  box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.5);
+  border-radius: 8px;
+  content: "";
+  height: 16px;
+  margin-top: -8px;
+  position: absolute;
+  opacity: 0.3;
+  transition: all 0.4s ease-in-out;
+  width: 40px;
 }
 
 .material-switch > label::after {
-    background: rgb(255, 255, 255);
-    border-radius: 16px;
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
-    content: '';
-    height: 24px;
-    left: -4px;
-    margin-top: -8px;
-    position: absolute;
-    top: -4px;
-    transition: all 0.3s ease-in-out;
-    width: 24px;
+  background: rgb(255, 255, 255);
+  border-radius: 16px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+  content: "";
+  height: 24px;
+  left: -4px;
+  margin-top: -8px;
+  position: absolute;
+  top: -4px;
+  transition: all 0.3s ease-in-out;
+  width: 24px;
 }
 
 .material-switch > input:checked + label::before {
-    background: inherit;
-    opacity: 0.5;
+  background: inherit;
+  opacity: 0.5;
 }
 
 .material-switch > input:checked + label::after {
-    background: inherit;
-    left: 20px;
+  background: inherit;
+  left: 20px;
 }
 
-input[type='radio'] {
-    display: none;
+input[type="radio"] {
+  display: none;
 }
 
 body {
-    display: table;
-    position: absolute;
-    height: 100%;
-    width: 100%;
+  display: table;
+  position: absolute;
+  height: 100%;
+  width: 100%;
 }
 
 #facility-name {
-    font-family: 'serpentine', sans-serif;
-    font-weight: 500;
-    font-style: italic;
-    margin-left: -1vw;
-    margin-top: 2.5vh;
+  font-family: "serpentine", sans-serif;
+  font-weight: 500;
+  font-style: italic;
+  margin-left: -1vw;
+  margin-top: 2.5vh;
 }
 
 #live-time {
-    font-size: 4.5vw;
-    font-weight: bold;
+  font-size: 4.5vw;
+  font-weight: bold;
 }
 
 .container-fluid {
-    padding: 5vw;
-    display: table-cell;
-    vertical-align: middle;
+  padding: 5vw;
+  display: table-cell;
+  vertical-align: middle;
 }
 
 .buffer-lg {
-    margin-bottom: 3vh;
+  margin-bottom: 3vh;
 }
 
-.event-table {
-    font-size: 2.75vw;
+#event-table {
+  display: none;
+  font-size: 2.75vw;
 }
 
-.event-text {
-    font-size: 3vw;
-    font-weight: bolder;
-    font-style: italic;
-    color: #eeeeee;
+#event-text {
+  display: none;
+  font-size: 3vw;
+  font-weight: bolder;
+  font-style: italic;
+  color: #eeeeee;
+}
+
+.center {
+  display: flex;
+  align-items: center;
+}
+
+.center svg {
+  padding-right: 5px;
+  width: max-content;
 }
 
 .modal {
-    text-align: center;
-    padding: 0 !important;
-    font-size: 1rem;
+  text-align: center;
+  padding: 0 !important;
+  font-size: 1rem;
 }
 
 .modal:before {
-    content: '';
-    display: inline-block;
-    height: 100vh;
-    vertical-align: middle;
-    margin-right: -4px;
+  content: "";
+  display: inline-block;
+  height: 100vh;
+  vertical-align: middle;
+  margin-right: -4px;
 }
 
 .modal-dialog {
-    display: inline-block;
-    text-align: left;
-    vertical-align: middle;
+  display: inline-block;
+  text-align: left;
+  vertical-align: middle;
 }
 
 #swipe-modal > .modal-dialog {
-    width: 400px;
+  width: 400px;
 }
 
 .modal-body > .img-responsive {
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    width: 360px;
-    height: 440px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 360px;
+  height: 440px;
 }
 
 @media (max-width: 991px) {
-    .container-fluid {
-        padding: 10vw;
-        vertical-align: top;
-    }
+  .container-fluid {
+    padding: 10vw;
+    vertical-align: top;
+  }
 
-    .modal:before {
-        display: none;
-    }
+  .modal:before {
+    display: none;
+  }
 
+  html,
+  body {
+    font-size: 1rem;
+  }
 
-    html, body {
-        font-size: 1rem;
-    }
-
-    h1 {
-        font-size: 1.5rem;
-    }
+  h1 {
+    font-size: 1.5rem;
+  }
 }

@@ -2,7 +2,7 @@
 /* eslint-disable no-unused-vars */
 
 /**
- * gdp.jRRs
+ * gdp.js
  * A set of utility functions used by GDP to query, configure, and display event
  * information as well as capturing ID swiping. Depends on jQuery 2+ and
  * day.js.
@@ -13,13 +13,13 @@
  */
 
 // Global Data
-
 var ROOM_DATA, SETTING_DATA;
 var _selected_room, _swipe_cooldown, _swipe_timer;
 
 /**
  * Clears url query parameters
  */
+
 function url_reset() {
   window.location.href = window.location.pathname;
 }
@@ -30,6 +30,7 @@ function url_reset() {
 function url_encode() {
   window.location.href = window.location.pathname + "?" + $.param(SETTING_DATA);
 }
+
 /**
  * Parses key/ value pairs from url query parameters
  */
@@ -93,14 +94,16 @@ function settings_toggle(name) {
  * @param timeout - The amount of time until the modal is dismissed.
  */
 function view_swipe_modal(customer_id, timeout) {
-  const _selected_room = ROOM_DATA.find(
-    (room) => room.facility_id === Number(SETTING_DATA.facility)
-  );
+  var _selected_room = ROOM_DATA.find(function (room) {
+    return room.facility_id === Number(SETTING_DATA.facility);
+  });
+
   if (_selected_room && SETTING_DATA.training)
     _selected_room.workstation_id = null;
-  const image = new Image();
+  var image = new Image();
   image.className = "img-responsive";
-  let alertDetails, alertStatus, alertClass;
+  var alertDetails, alertStatus, alertClass;
+
   /* Make ajax call to card-reader.php  */
   $.ajax({
     url: "swipe.php",
@@ -109,7 +112,10 @@ function view_swipe_modal(customer_id, timeout) {
       workstationId: _selected_room.workstation_id,
       customerId: customer_id,
     },
-    success: function ({ valid, image_data }) {
+    success: function success(response) {
+      var valid = response.valid,
+        error = response.error;
+
       if (valid) {
         alertDetails = "Attendance Recorded";
         alertStatus = "Valid Pass";
@@ -119,36 +125,31 @@ function view_swipe_modal(customer_id, timeout) {
         alertStatus = "Invalid Pass";
         alertClass = "alert-warning";
       }
-      image.src = "data:image/png;base64," + image_data;
-    },
-    error: function () {
-      alertDetails = "See Customer Service";
-      alertStatus = "Invalid Pass";
-      alertClass = "alert-warning";
-      image.src = "img/missing.png";
-    },
-  }).then(() => {
-    /* Display Model */
-    document.getElementById("cr-response").innerHTML =
-      '<div class="alert ' +
-      alertClass +
-      '" role="alert"><strong>' +
-      alertStatus +
-      ": </strong>" +
-      alertDetails +
-      "</div>";
-    document.body.appendChild(image);
-    document.getElementById("cr-response").appendChild(image);
-    $("#swipe-modal").modal("show");
 
-    /* Hide modal after timeout */
-    _swipe_cooldown = timeout * 1000;
-    if (_swipe_cooldown) {
-      clearTimeout(_swipe_timer);
-      _swipe_timer = setTimeout(function () {
-        $("#swipe-modal").modal("hide");
-      }, _swipe_cooldown);
-    }
+      image.src = "photo.php?" + customer_id;
+      /* Display Model */
+
+      document.getElementById("cr-response").innerHTML =
+        '<div class="alert ' +
+        alertClass +
+        '" role="alert"><strong>' +
+        alertStatus +
+        ": </strong>" +
+        alertDetails +
+        "</div>";
+      document.body.appendChild(image);
+      document.getElementById("cr-response").appendChild(image);
+      $("#swipe-modal").modal("show");
+
+      /* Hide modal after timeout */
+      _swipe_cooldown = timeout * 1000;
+      if (_swipe_cooldown) {
+        clearTimeout(_swipe_timer);
+        _swipe_timer = setTimeout(function () {
+          $("#swipe-modal").modal("hide");
+        }, _swipe_cooldown);
+      }
+    },
   });
 }
 
@@ -199,48 +200,41 @@ function shadeColour(color, percent) {
 function init_config() {
   /* Load settings from url query */
   url_decode();
-
-  _selected_room = ROOM_DATA.find(
-    (room) => Number(room.facility_id) === Number(SETTING_DATA.facility)
-  );
+  _selected_room = ROOM_DATA.find(function (room) {
+    return Number(room.facility_id) === Number(SETTING_DATA.facility);
+  });
   if (_selected_room && SETTING_DATA.training)
     _selected_room.workstation_id = null;
 
   /* Set Facility Name */
   document.getElementById("facility-name").innerHTML = _selected_room.name;
-
   var nameLen = _selected_room.name.length;
   $("#facility-name").css("font-size", 2.5 + 40 / nameLen + "vw");
 
   /* Configure Settings Modal */
-  ROOM_DATA.forEach((room) => {
+  ROOM_DATA.forEach(function (room) {
     if (!room.visible) return;
     var input = document.createElement("input");
     input.type = "radio";
     input.name = "facility_id";
     input.id = room.facility_id;
-    input.onclick = () => {
+    input.onclick = function () {
       SETTING_DATA.facility = room.facility_id;
     };
     input.checked = room.facility_id == SETTING_DATA.facility;
-
     var label = document.createElement("label");
     label.setAttribute("for", room.facility_id);
     label.className = "label-primary";
-
     var div = document.createElement("div");
     div.className = "material-switch pull-right";
     div.appendChild(input);
     div.appendChild(label);
-
     var li = document.createElement("li");
     li.className = "list-group-item";
     li.appendChild(document.createTextNode(room.name));
     li.appendChild(div);
-
     $("#facility-dropdown").append(li);
   });
-
   $("#load-settings").on("click", function () {
     $("#settings-modal").modal("show");
     $.each(SETTING_DATA, function (setting, state) {
@@ -276,48 +270,28 @@ function init_event() {
   $.ajax({
     url: "php/event-query.php",
     data: {
-      activeId: SETTING_DATA.facility,
-      //,'dateOffset': "-1"
+      activeId: SETTING_DATA.facility, //,'dateOffset': "-1"
     },
-    success: function (response) {
-      var json = $.parseJSON(response);
+    success: function success(response) {
+      var json = JSON.parse(response);
       var time_now = (Date.now() / 1000) | 0;
 
       /* Hide passed events */
       if (!SETTING_DATA.show_passed_events) {
-        for (var event in json)
+        for (var event in json) {
           if (json.hasOwnProperty(event))
             if (time_now > json[event].time_to) delete json[event];
+        }
       }
 
       if ($.isEmptyObject(json)) {
-        $("#event-body").html("Nothing Scheduled").attr("class", "event-text");
+        $("#event-text").css("display", "block");
+        $("#event-table").css("display", "none");
       } else {
+        $("#event-text").css("display", "none");
+        $("#event-table").css("display", "table");
         var maxrows = Math.floor((window.innerHeight / window.innerWidth) * 9);
-
-        /* Create headings */
-        var span_name = document.createElement("span");
-        span_name.className = "fas fa-calendar-o";
-        var th_name_col = document.createElement("th");
-        th_name_col.appendChild(span_name);
-        th_name_col.appendChild(document.createTextNode(" Event Name"));
-
-        var span_clock = document.createElement("span");
-        span_clock.className = "fas fa-clock-o";
-        var th_time_col = document.createElement("th");
-        th_time_col.appendChild(span_clock);
-        th_time_col.appendChild(document.createTextNode(" Time"));
-
-        var tr_head = document.createElement("tr");
-        tr_head.appendChild(th_time_col);
-        tr_head.appendChild(th_name_col);
-
-        var thead = document.createElement("thead");
-        thead.appendChild(tr_head);
-
-        /* Create table body */
-        var tbody = document.createElement("tbody");
-
+        var tbody = document.getElementById("event-table-body");
         var colour = "#000000";
         var steps = Object.keys(json).length;
         steps = 1 / (steps <= maxrows ? steps : maxrows);
@@ -328,17 +302,14 @@ function init_event() {
             var tr_body = document.createElement("tr");
             var time_from = json[entry].time_from;
             var time_to = json[entry].time_to;
-
             var td_time = document.createElement("td");
             td_time.appendChild(
               document.createTextNode(format_time(time_from, time_to))
             );
             tr_body.appendChild(td_time);
-
             var td_name = document.createElement("td");
             td_name.appendChild(document.createTextNode(json[entry].name));
             tr_body.appendChild(td_name);
-
             tr_body.style.color = colour;
             tr_body.style.color =
               time_from < time_now &&
@@ -348,17 +319,9 @@ function init_event() {
                 : colour;
             tbody.appendChild(tr_body);
             colour = shadeColour(colour, (steps * ++step) / 1.5 - 0.1);
-
             if (step == maxrows) break;
           }
         }
-
-        /* Display table */
-        var table = document.createElement("table");
-        table.className = "table";
-        table.appendChild(thead);
-        table.appendChild(tbody);
-        $("#event-body").html(table).attr("class", "event-table");
       }
     },
   });
