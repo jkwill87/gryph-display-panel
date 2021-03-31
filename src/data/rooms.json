@@ -105,7 +105,7 @@
     "name": "GGAC Studio Room 302",
     "facility_id": 69,
     "workstation_id": null,
-    "visible": true
+    "visible": false
   },
   {
     "name": "GGAC Studio Room 173",
@@ -423,7 +423,7 @@
     "name": "Gryphon Lounge 131",
     "facility_id": 131,
     "workstation_id": null,
-    "visible": false
+    "visible": true
   },
   {
     "name": "Mitchell Lobby",
@@ -435,7 +435,7 @@
     "name": "Gryphon Centre - Lobby",
     "facility_id": 133,
     "workstation_id": null,
-    "visible": false
+    "visible": true
   },
   {
     "name": "Small Gym",
@@ -549,7 +549,7 @@
     "name": "Climbing Wall",
     "facility_id": 159,
     "workstation_id": null,
-    "visible": false
+    "visible": true
   },
   {
     "name": "Gold Pool - North Half",
@@ -663,55 +663,55 @@
     "name": "GGAC VIP Suite",
     "facility_id": 545,
     "workstation_id": null,
-    "visible": false
+    "visible": true
   },
   {
     "name": "GGAC Meeting Room 3201",
     "facility_id": 546,
     "workstation_id": null,
-    "visible": false
+    "visible": true
   },
   {
     "name": "GGAC Meeting Room 3203",
     "facility_id": 547,
     "workstation_id": null,
-    "visible": false
+    "visible": true
   },
   {
     "name": "GGAC Studio Room 3206 Wrestling",
     "facility_id": 548,
     "workstation_id": null,
-    "visible": false
+    "visible": true
   },
   {
     "name": "GGAC Studio Room 3202",
     "facility_id": 549,
     "workstation_id": null,
-    "visible": false
+    "visible": true
   },
   {
     "name": "GGAC Studio Room 3212",
     "facility_id": 550,
-    "workstation_id": null,
-    "visible": false
+    "workstation_id": 53,
+    "visible": true
   },
   {
     "name": "GGAC Studio Room 3214",
     "facility_id": 551,
-    "workstation_id": null,
+    "workstation_id": 55,
     "visible": true
   },
   {
     "name": "GGAC Studio Room 3216",
-    "facility_id": 552,
+    "facility_id": 56,
     "workstation_id": null,
-    "visible": false
+    "visible": true
   },
   {
     "name": "GGAC Studio Room 3213",
     "facility_id": 553,
-    "workstation_id": null,
-    "visible": false
+    "workstation_id": 54,
+    "visible": true
   },
   {
     "name": "GGAC Event Centre - #3 - East Court",
@@ -854,8 +854,8 @@
   {
     "name": "Athletics SAM",
     "facility_id": 777,
-    "workstation_id": null,
-    "visible": false
+    "workstation_id": 69,
+    "visible": true
   },
   {
     "name": "GGAC Room 241A - Collaboration Space",
