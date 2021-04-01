@@ -7,6 +7,10 @@
     "type": "git",
     "url": "git+https://github.com/jkwill87/gryph-display-panel.git"
   },
+  "scripts": {
+    "dev": "npx grunt build; cd dist; php -S localhost:8000",
+    "build": "npx grunt"
+  },
   "author": "Jessy Williams",
   "license": "MIT",
   "homepage": "https://github.com/jkwill87/gryph-display-panel#readme",
