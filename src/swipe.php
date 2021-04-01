@@ -15,6 +15,7 @@ function abort($code, $msg)
 $customer_id = trim(array_shift(array_filter([$_GET['customerId'], $_GET['customer_id']])));
 $customer_id = ltrim($customer_id, '0');
 $workstation_id = trim(array_shift(array_filter([$_GET['workstationId'], $_GET['workstation_id']])));
+header('Content-Type: application/json');
 if (!$customer_id || !$workstation_id) {
     abort(422, 'missing customer_id or workstation_id query parameters');
 }
@@ -33,5 +34,4 @@ $is_valid = swipe_card($username, $password, $customer_id, $workstation_id, $acc
 if ($is_valid === null) {
     abort(400, 'card swiping failed');
 }
-header('Content-Type: application/json');
 echo json_encode(['valid' => $is_valid, 'error' => null]);
